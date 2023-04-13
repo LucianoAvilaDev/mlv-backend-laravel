@@ -72,7 +72,7 @@ Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que
 
 -   **Criação do projeto**
 
-    -   Para criar um novo projeto no laravel, naveguei até a pasta **laragon/www** usei o comando **laravel new mlv-backend-laravel**
+    -   Para criar um novo projeto no usei o comando **composer create-project laravel/laravel="8.*" mlv-backend-laravel**. Foi escolhida a versão 8 devido a compatibilidade com o pacote do MongoDB para Laravel.
     -   Fui até a pasta **mlv-backend-laravel** e executei o **VS Code**.
     -   Utilizei o comando **git init** para iniciar o versionador git.
     -   Criei o arquivo **readme.md**, descrevi passos do projeto e salvei.
@@ -80,4 +80,22 @@ Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que
     -   Após ele iniciar, acessei <http://localhost:8000> no browser e abriu a tela de boas vindas do **Laravel**.
     -   Para versionar usei os recursos da extensão **Git Extension Pack** no próprio VS Code.
 
+- **Configurando o MongoDB no Laravel**
+  - Foi escolhido o **MongoDB** pela simplicidade e ausência de relacionamento dos dados a serem armazenados no banco.
+  - Instale o pacote rodando o comando **composer require jenssegers/mongodb --ignore-platform-reqs**
+  - Configurei o **.env** com os dados do MongoDB
+  - No **config/database.php** adicione dnas conexões
+  ```php
+   'mongodb' => [
+        'driver'   => 'mongodb',
+        'host'     => env('DB_HOST', 'localhost'),
+        'port'     => env('DB_PORT', 27017),
+        'database' => env('DB_DATABASE'),
+        'username' => env('DB_USERNAME'),
+        'password' => env('DB_PASSWORD'),
+        'options'  => []
+
+    ],
+  ```
+  - No **config/app.php** adicione aos providers *Jenssegers\Mongodb\MongodbServiceProvider::class*
 ---

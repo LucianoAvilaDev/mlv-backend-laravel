@@ -8,9 +8,10 @@ Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que
 
 -   [VS Code](https://code.visualstudio.com/download): Ferramenta de edição de código.
 -   [Git](https://git-scm.com/doc): Ferramenta de versionamento de código.
--   [Laragon Full](https://laragon.org/download/index.html): Ambiente de desenvolvimento e servidor local. Nele já vem inclusos o [PHP 8.1.10](https://www.php.net/downloads.php), [Apache 2.4.54](https://httpd.apache.org/download.cgi), [MySQL 8.0.30](https://www.mysql.com/downloads/) e [NodeJs 18.15](https://nodejs.org/en/);
+-   [PHP 8.1.10](https://www.php.net/downloads.php).
 -   [Composer 2.5.3](https://getcomposer.org/download/): Gerenciador de dependências para projetos em PHP
 -   [Laravel 10](https://laravel.com/docs/10.x): Framework de desenvolvimento fullstack, aqui utilizado para o back-end, em PHP.
+-   [MongoDB Community](https://www.mongodb.com/try/download/community): Sistema de banco de dados do tipo NoSQL.
 -   [Insomnia](https://insomnia.rest/download): Software para realizar requisições HTTP para APIs.
 
 ## Instalações
@@ -18,37 +19,42 @@ Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que
 -   **Visual Studio Code**
 
     -   Baixe e instale o [VS Code](https://code.visualstudio.com/download/).
-    -   Prossiga com a instalação até concluir.
+
+-   **PHP**
+
+    -   Baixe o [PHP 8.1.10](https://www.php.net/downloads.php). Descompacte a pasta em C:/ .
+    -   Acesse Editar variáveis de Ambiente do Sistema, vá na aba Avançado, em Variáveis de Ambiente.
+    -   Em Variáveis do Sistema, clique em **Path** e depois clique em editar.
+    -   Clique em Procurar, vá até a pasta do PHP que vc descompactou, selecione-a e clique Ok.
+    -   Clique em Ok nas demais janelas que abriram.
+    -   Abra o terminal e execute **php -v** para certificar que instalou corretamente.
+
+-   **MongoDB Community**
+
+    -   Baixe e instale o [MongoDB Community](https://www.mongodb.com/try/download/community).
+
+-   **Insomnia**
+
+    -   Baixe e instale o [Insomnia](https://insomnia.rest/download).
 
 -   **Git**
 
     -   Baixe e instale o [Git](https://git-scm.com/doc).
     -   Prossiga com a instalação até concluir.
 
--   **Laragon**
-
-    -   Baixe e instale o [Laragon](https://laragon.org/). Ele já vem por padrão com PHP, Apache, Node.JS.
-    -   Após a instalação, execute o **Laragon** e clique em **Iniciar Todos** para iniciar o **Apache** e o **MySQL**.
-    -   Acesse <http://localhost> no navegador. Se estiver tudo correto, deverá aparecer a tela de boas-vindas do **Laragon**.
-
 -   **Composer**
 
     -   Baixe e execute o [Composer](https://getcomposer.org/). Instale no modo **desenvolvedor**.
-    -   Na etapa de selecionar o PHP, navege até a pasta do **laragon**, navegue até bin/php, abra a pasta da versão do PHP e selecione o arquivo **php.exe**.
+    -   Na etapa de selecionar o PHP, navege até a pasta do **PHP** instalado em sua máquina e selecione o arquivo **php.exe**.
     -   Prossiga com a instalação padrão até concluir.
-    -   Teste se instalou abrindo o terminal do **Laragon** e digitando o comando _composer_.
 
 -   **Laravel**
 
-    -   Abra o **Git Bash** ou o **VS Code** na pasta **www**, dentro da pasta do **laragon**.
-    -   Rode o comando **composer global require laravel/installer** para instalar o laravel globalmente.
+    -   Abra o **Git Bash** ou o **VS Code** e execute comando **composer global require laravel/installer** para instalar o laravel globalmente.
 
 ## Executando o projeto
 
 -   **Preparando o banco de dados**
-
-    -   Abra o banco de dados do Laragon, acesse o host 127.0.0.1, porta 3306, insira o username e a senha pra entrar.
-    -   Crie um banco de dados chamado **mvl_laravel** com collection sendo **utf8mb4_unicode_ci**
 
 -   **Clonando o projeto**
 
@@ -60,7 +66,6 @@ Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que
 
     -   Copie o arquivo **.env.example** e renomeie a cópia para **.env**
     -   No **.env** altere as propriedades do banco conforme o seu banco local
-    -   Execute o comando **php artisan migrate** para gerar as migrations
     -   Execute o comando **php artisan serve** para iniciar o servidor
 
 ## Desenvolvimento

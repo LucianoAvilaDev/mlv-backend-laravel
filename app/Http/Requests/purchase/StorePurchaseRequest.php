@@ -3,6 +3,9 @@
 namespace App\Http\Requests\purchase;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
+
 
 class StorePurchaseRequest extends FormRequest
 {
@@ -27,5 +30,17 @@ class StorePurchaseRequest extends FormRequest
             'total' => 'required|numeric',
             'item_products' => 'array|required|min:1'
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+
+            'mensagem' => 'Erro de validação',
+
+            'erros' => $validator->errors()
+
+        ], 422));
+
     }
 }

@@ -15,16 +15,18 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return response()->json($users, 200);
     }
 
     public function store(StoreUserRequest $request)
     {
+
         try {
             DB::beginTransaction();
 
             $validatedUser = $request->validated();
-            $validatedUser->password = Hash::make($request['password']);
+            $validatedUser['password'] = Hash::make($request['password']);
             $newUser = User::create($validatedUser);
 
             DB::commit();
@@ -33,7 +35,8 @@ class UserController extends Controller
 
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json("Erro ao criar registro", 500);
+
+            return response()->json("Erro ao criar registro:" . $e, 200);
         }
     }
 
@@ -52,15 +55,18 @@ class UserController extends Controller
             DB::beginTransaction();
 
             $validatedUser = $request->validated();
-            $validatedUser->password = $user->password == $user->password
-                ? $user->password
+            $validatedUser['password'] = $user['password'] == $user['password']
+                ? $user['password']
                 : Hash::make($request['password']);
 
             $updatedUser = $user->update($validatedUser);
 
-            DB::commit();
+            if ($updatedUser) {
+                DB::commit();
+                return response()->noContent(200);
+            }
 
-            return response()->json($updatedUser, 201);
+            throw new \Exception();
 
         } catch (\Exception $e) {
             DB::rollback();
@@ -74,11 +80,14 @@ class UserController extends Controller
         try {
             DB::beginTransaction();
 
-            $user->delete();
+            $deletedUser = $user->delete();
 
-            DB::commit();
+            if ($deletedUser) {
+                DB::commit();
+                return response()->json('', 204);
+            }
 
-            return response()->json('', 204);
+            throw new \Exception();
         } catch (\Exception $e) {
             DB::rollback();
 

@@ -2,45 +2,41 @@
 
 ## Escopo
 
-Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que são obtidos através da API dos seus dois fornecedores, onde as compras serão salvas no banco de dados com os dados do cliente e do produto. 
+Sistema de e-commerce desenvolvido para uma loja poder vender seus produtos, que são obtidos através da API dos seus dois fornecedores, onde as compras serão salvas no banco de dados com os dados do cliente e do produto.
 
 ## Solução proposta
 
-Para resolver o problema  foram definidas as seguintes regras:
+Para resolver o problema foram definidas as seguintes regras:
 
-- **Produtos**
-  - Serão obtidos dinamicamente pelas APIs dos fornecedores.
-  - Estarão em exibição na tela e poderão ser filtrados por categoria, nome, etc.
-  - Quando feita a compra, é criado o item de produto com os dados do produto no ato da compra.
-  - Os itens são criados para previnir que possíveis alterações futuras no produto impactem nos valores do mesmo no ato da compra realizada anteriormente.
-  
-- **Compras**
-  - A compra só é concretizada após o cliente clicar em comprar e confirmar. 
-  - Deve haver itens no carrinho para poder concretizar a compra.
-  - A compra possuirá os dados do cliente e dos itens da compra.
-  - Ambos item e compra ficam salvos no banco de dados
-  
-- **Carrinho**
-  - Os dados do carrinho ficam armazenados nos cookies.
-  - Após concluída a compra, o carrinho deve ser esvaziado. 
-  
-- **Usuário - Cliente**
+-   **Produtos**
+    -   Serão obtidos dinamicamente pelas APIs dos fornecedores.
+    -   Estarão em exibição na tela e poderão ser filtrados por categoria, nome, etc.
+    -   Quando feita a compra, é criado o item de produto com os dados do produto no ato da compra.
+    -   Os itens são criados para previnir que possíveis alterações futuras no produto impactem nos valores do mesmo no ato da compra realizada anteriormente.
+-   **Compras**
+    -   A compra só é concretizada após o cliente clicar em comprar e confirmar.
+    -   Deve haver itens no carrinho para poder concretizar a compra.
+    -   A compra possuirá os dados do cliente e dos itens da compra.
+    -   Ambos item e compra ficam salvos no banco de dados
+-   **Carrinho**
+    -   Os dados do carrinho ficam armazenados nos cookies.
+    -   Após concluída a compra, o carrinho deve ser esvaziado.
+-   **Usuário - Cliente**
 
-  - Só poderá realizar a compra com cadastro.
-  - Pode alterar apenas os próprios dados, exceto o perfil.
-  - Pode logar e deslogar do sistema.
-  
-- **Usuário - Admin**
-  - Pode alterar os próprios dados e dados dos clientes.
-  - Pode ver e alterar as compras realizadas.
-  - Pode logar e deslogar do sistema.
-  
-- **Mais informações**
-  - Usuários sem cadastro podem navegar pelo sistema livremente e adicionar produtos ao carrinho.
-  - É necessário possuir cadastro para concretizar a compra.
-  - O sistema possui dois tipos de usuário: admin e cliente. Padrão de criação: cliente.
-  - Não foi implementado sistema de pagamento.
-  
+    -   Só poderá realizar a compra com cadastro.
+    -   Pode alterar apenas os próprios dados, exceto o perfil.
+    -   Pode logar e deslogar do sistema.
+
+-   **Usuário - Admin**
+    -   Pode alterar os próprios dados e dados dos clientes.
+    -   Pode ver e alterar as compras realizadas.
+    -   Pode logar e deslogar do sistema.
+-   **Mais informações**
+    -   Usuários sem cadastro podem navegar pelo sistema livremente e adicionar produtos ao carrinho.
+    -   É necessário possuir cadastro para concretizar a compra.
+    -   O sistema possui dois tipos de usuário: admin e cliente. Padrão de criação: cliente.
+    -   Não foi implementado sistema de pagamento.
+
 ## Ferramentas
 
 -   [VS Code](https://code.visualstudio.com/download): Ferramenta de edição de código.
@@ -111,14 +107,28 @@ Para resolver o problema  foram definidas as seguintes regras:
     -   Para verificar se o projeto foi criado corretamente, executei **php artisan serve** na pasta do projeto.
     -   Após ele iniciar, acessei <http://localhost:8000> no browser e abriu a tela de boas vindas do **Laravel**.
     -   Para versionar usei os recursos da extensão **Git Extension Pack** no próprio VS Code.
-    -   
-- **Implementando autenticação com Sanctum**
-  - Ele já vem instalado no laravel 10, então parti pra configuração das rotas e controller.
-  - Criei a LoginController com os métodos **login** e **logout**.
-  - Defini as rotas de login e logout em **routes/api**.
+    -
 
-- **Models e migrations**
-  - As models definidas foram User(usuário), Product(produto) e Purchase(compra).
-  - Usei a mesma model e migration de User já nativa do laravel, apenas adicionando mais campos
-  - Geração das models com migrations usando o comando **php artisan make:model NomeModel -m**. 
+-   **Implementando autenticação com Sanctum**
+
+    -   Ele já vem instalado no laravel 10, então parti pra configuração das rotas e controller.
+    -   Criei a LoginController com os métodos **login** e **logout**.
+    -   Defini as rotas de login e logout em **routes/api**.
+
+-   **Models e migrations**
+
+    -   As models definidas foram User(usuário), Product(produto), ItemProduct(item) e Purchase(compra).
+    -   Usei a mesma model e migration de User já nativa do laravel, apenas adicionando mais campos
+    -   Geração das models com migrations usando o comando **php artisan make:model NomeModel -m**.
+    -   Um usuário pode ser cliente de várias compras e uma compra pode ter vários itens de produto.
+
+-   **Controllers e Rotas**
+    -   As controllers definidas foram Auth(autenticação), Client(cliente), User(usuário), Product(produto) e Purchase(compra).
+    -   A controller de Cliente possui apenas as ações de criar, editar e exibir. Seu propósito é a alteração própria de dados do usuário logado
+    -   A controller de Produto consiste nas consultas as APIs fornecidas.
+    -   Uma controller invokable foi criada para obter as compras a partir do id do usuário
+    -   As demais controllers são de CRUD.
+    -   Foram criados **requests** específicos para os métodos **store** e **update** dos CRUDs.
+    -   As rotas foram definidas em **routes/api.php** seguindo padrão RESTful.
+
 ---

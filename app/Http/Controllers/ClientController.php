@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request, bool $isAdmin)
     {
         try {
             DB::beginTransaction();
 
             $validatedUser = $request->validated();
             $validatedUser->password = Hash::make($request['password']);
-            $validatedUser->is_admin = false;
+            $validatedUser->is_admin = $isAdmin;
             $newUser = User::create($validatedUser);
 
             DB::commit();
@@ -33,7 +33,7 @@ class ClientController extends Controller
 
     public function show()
     {
-        return Auth::user();
+        return response()->json(Auth::user(), 200);
     }
 
     public function update(UpdateUserRequest $request)

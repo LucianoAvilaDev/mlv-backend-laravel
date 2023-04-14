@@ -27,10 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'created_at',
+        'updated_at',
+        'email_verified_at'
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'birth_date' => 'datetime:Y-m-d',
+        'is_admin' => 'boolean'
     ];
 
     public function purchases()

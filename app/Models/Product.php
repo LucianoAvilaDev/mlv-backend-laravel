@@ -10,12 +10,16 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',
+        'product_id',
         'name',
         'description',
         'price',
         'material',
         'provider'
+    ];
+
+    protected $casts = [
+        'price' => 'decimal'
     ];
 
     public function __construct(array $atributes)

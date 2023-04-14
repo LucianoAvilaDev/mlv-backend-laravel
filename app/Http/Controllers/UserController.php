@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\user\StoreUserRequest;
 use App\Http\Requests\user\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +20,6 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-
         try {
             DB::beginTransaction();
 

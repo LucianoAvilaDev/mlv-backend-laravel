@@ -11,6 +11,10 @@ Route::get('/', function () {
     return 'API running on port 8000';
 });
 
+Route::get('/unauthenticated', function () {
+    return response()->json('Usuário não autenticado', 401);
+})->name('unauthenticated');
+
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {

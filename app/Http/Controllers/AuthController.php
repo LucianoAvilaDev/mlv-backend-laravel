@@ -11,19 +11,20 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = User::where('email',$request->email);
+            $user = Auth::user();
 
-            $token = $user->createToken('JWT');
+            $token['type'] = 'bearer';
+            $token['token'] = $user->createToken('token')->plainTextToken;
 
-            return response()->json($token->plainTextToken(), 200);
+            return response()->json($token, 200);
         }
 
-        return response()->json("Usuário inválido", 401);
+        return response()->json("Usuário inválido", 400);
     }
 
     public function logout()
     {
-        Auth::logout();
+        Auth::user()->tokens()->delete();
 
         return response()->json("Usuário deslogado", 200);
     }

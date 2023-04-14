@@ -10,12 +10,21 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'name',
         'description',
-        'category',
-        'image',
         'price',
         'material',
-        'department'
+        'provider'
     ];
+
+    public function __construct(array $atributes)
+    {
+        $this->id = $atributes['id'];
+        $this->name = $atributes['name'];
+        $this->description = $atributes['description'];
+        $this->price = $atributes['price'];
+        $this->material = $atributes['material'];
+        $this->provider = $atributes['provider'];
+    }
 }

@@ -36,8 +36,13 @@ class MakeService extends GeneratorCommand
      */
     protected function replaceClass($stub, $name)
     {
+        $nameInArray = explode("/", $this->argument('name'));
+        $className = $nameInArray[sizeof($nameInArray) - 1];
+        $className = str_replace('Service', '', $className);
+
         $stub = parent::replaceClass($stub, $name);
-        return str_replace('ServiceName', $this->argument('name') . 'Service', $stub);
+
+        return str_replace('ServiceName', $className . 'Service', $stub);
     }
     /**
      * Obtpem o arquivo stub para o gerador.

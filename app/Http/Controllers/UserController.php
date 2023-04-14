@@ -42,11 +42,7 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        if (Auth::user()->is_admin && $user->is_admin == false || $user->id == Auth::user()->id) {
-            return response()->json($user, 200);
-        }
-
-        return response()->json('Ação não autorizada', 401);
+        return response()->json($user, 200);
     }
 
     public function update(UpdateUserRequest $request, User $user)

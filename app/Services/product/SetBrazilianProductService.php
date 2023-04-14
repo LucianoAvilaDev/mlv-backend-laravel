@@ -17,7 +17,7 @@ class SetBrazilianProductService
             'category' => $product['categoria'],
             'department' => $product['departamento'],
             'provider' => 'br',
-            'image' => $product['imagem']
+            'image' => str_replace('\\', '/', $product['imagem'])
         ]);
     }
 }

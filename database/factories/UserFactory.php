@@ -19,6 +19,7 @@ class UserFactory extends Factory
             'cpf' => '00011122233',
             'address' => $this->faker->address(),
             'cep' => '98985774',
+            'birth_date' => $this->faker->date(),
             'is_admin' => false,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),

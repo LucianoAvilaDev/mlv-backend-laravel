@@ -37,7 +37,7 @@ class ProductController extends Controller
                     return response()->json($product, 200);
                 }
             case "eu": {
-                    $responseProduct = Http::get(env('API_BRAZILIAN_PROVIDER') . '/' . $id)->json();
+                    $responseProduct = Http::get(env('API_EUROPEAN_PROVIDER') . '/' . $id)->json();
                     $product = SetEuropeanProductService::run($responseProduct);
                     return response()->json($product, 200);
                 }

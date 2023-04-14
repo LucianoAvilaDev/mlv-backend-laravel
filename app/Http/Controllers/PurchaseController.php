@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\purchase\StorePurchaseRequest;
 use App\Models\Purchase;
-use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {
@@ -17,9 +16,6 @@ class PurchaseController extends Controller
         return response()->json($newPurchase, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $purchase = Purchase::with('client', 'products')->find($id);

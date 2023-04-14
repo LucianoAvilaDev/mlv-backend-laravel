@@ -22,7 +22,10 @@ class StorePurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'client_id' => 'required',
+            'date_time' => 'required|date_format:Y-m-d H:i:s',
+            'total' => 'required|numeric',
+            'item_products' => 'array|required|min:1'
         ];
     }
 }

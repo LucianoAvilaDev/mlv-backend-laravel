@@ -1,24 +1,35 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ProductController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::post('/login', 'AuthController@login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::post('/logout', 'AuthController@logout');
-    Route::resource('/user', 'UserController');
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
 
+    Route::resource('/users', UserController::class)
+        ->middleware('admin')
+        ->except(['create', 'edit']);
+
+    Route::resource('/clients', ClientController::class)
+        ->only(['store', 'show', 'update']);
+
+    Route::resource('/purchases', PurchaseController::class)
+        ->middleware('admin')
+        ->except(['create', 'edit']);
+
+    Route::get('/user-purchases', [GetUserPurchasesController::class])
+        ->name('user.purchases');
 });
+
+Route::get('/products', [ProductController::class, 'getAllProducts'])->name('products.getAll');
+
+Route::get('/products/{id}/{provider}', [ProductController::class,'getOneProduct'])->name('products.getOne');
+

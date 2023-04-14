@@ -10,13 +10,18 @@ class ItemProduct extends Model
     use HasFactory;
 
     protected $fillable = [
+        'purchase_id',
+        'provider_product_id',
         'name',
         'description',
         'category',
         'image',
-        'price',
         'material',
-        'department'
+        'department',
+        'price',
+        'quantity',
+        'total',
+        'provider'
     ];
 
     public function purchase()

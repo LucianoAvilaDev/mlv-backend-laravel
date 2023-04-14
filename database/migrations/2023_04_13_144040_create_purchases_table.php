@@ -12,8 +12,11 @@ return new class extends Migration {
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $
-                $table->timestamps();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('users');
+            $table->dateTime('date_time');
+            $table->decimal('total', 10, 2);
+            $table->timestamps();
         });
     }
 

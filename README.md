@@ -122,13 +122,19 @@ Para resolver o problema foram definidas as seguintes regras:
     -   Geração das models com migrations usando o comando **php artisan make:model NomeModel -m**.
     -   Um usuário pode ser cliente de várias compras e uma compra pode ter vários itens de produto.
 
--   **Controllers e Rotas**
+-   **Controllers**
+
     -   As controllers definidas foram Auth(autenticação), Client(cliente), User(usuário), Product(produto) e Purchase(compra).
     -   A controller de Cliente possui apenas as ações de criar, editar e exibir. Seu propósito é a alteração própria de dados do usuário logado
     -   A controller de Produto consiste nas consultas as APIs fornecidas.
     -   Uma controller invokable foi criada para obter as compras a partir do id do usuário
     -   As demais controllers são de CRUD.
     -   Foram criados **requests** específicos para os métodos **store** e **update** dos CRUDs.
+
+-   **Rotas**
     -   As rotas foram definidas em **routes/api.php** seguindo padrão RESTful.
+    -   Foi criada uma **middleware** para validação se o usuário é **admin** ou não.
+    -   A middleware **admin** foi utilizada em algumas rotas para previnir de o usuário acessar dados indevidos.
+    -   Rodei **php artisan route:list** para checagem das rotas.
 
 ---

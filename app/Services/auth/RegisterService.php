@@ -2,7 +2,7 @@
 
 namespace App\Services\auth;
 
-use App\Http\Requests\user\RegisterRequest;
+use App\Http\Requests\auth\RegisterRequest;
 use App\Models\User;
 use Error;
 use Illuminate\Support\Facades\DB;

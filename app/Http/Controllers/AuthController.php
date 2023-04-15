@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\user\LoginRequest;
-use App\Http\Requests\user\RegisterRequest;
-use App\Services\user\ForgotPasswordService;
-use App\Services\user\LoginService;
-use App\Services\user\RegisterService;
-use App\Services\user\ResetPasswordService;
+use App\Http\Requests\auth\LoginRequest;
+use App\Http\Requests\auth\RegisterRequest;
+use App\Services\auth\LoginService;
+use App\Services\auth\ForgotPasswordService;
+use App\Services\auth\RegisterService;
+use App\Services\auth\ResetPasswordService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +15,9 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        $token = LoginService::run($request);
+        $response = LoginService::run($request);
 
-        return response()->json($token, 200);
+        return response()->json($response, 200);
     }
 
     public function logout()

@@ -17,6 +17,8 @@ Route::get('/unauthenticated', function () {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+Route::post('/forgot', [AuthController::class, 'forgot'])->name('forgot');
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout'])

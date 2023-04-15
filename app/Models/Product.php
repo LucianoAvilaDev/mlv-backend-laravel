@@ -18,10 +18,6 @@ class Product extends Model
         'provider'
     ];
 
-    protected $casts = [
-        'price' => 'decimal'
-    ];
-
     public function __construct(array $atributes)
     {
         $this->id = $atributes['id'];

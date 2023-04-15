@@ -28,7 +28,7 @@ class StorePurchaseRequest extends FormRequest
             'client_id' => 'required',
             'date_time' => 'required|date_format:Y-m-d H:i:s',
             'total' => 'required|numeric',
-            'item_products' => 'array|required|min:1'
+            'products' => 'array|required|min:1'
         ];
     }
 

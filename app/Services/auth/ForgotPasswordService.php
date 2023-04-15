@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\user;
+namespace App\Services\auth;
 
 use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;

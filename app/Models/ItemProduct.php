@@ -10,6 +10,7 @@ class ItemProduct extends Model
     use HasFactory;
 
     protected $fillable = [
+        'purchase_id',
         'product_id',
         'name',
         'description',
@@ -22,10 +23,13 @@ class ItemProduct extends Model
         'has_discount',
         'discount_value',
         'adjective',
+        'quantity',
+        'total',
     ];
 
     public function purchase()
     {
         return $this->belongsTo(Purchase::class, 'purchase_id', 'id');
     }
+
 }

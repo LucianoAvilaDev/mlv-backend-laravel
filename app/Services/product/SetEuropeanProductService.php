@@ -3,7 +3,6 @@
 namespace App\Services\product;
 
 use App\Models\EuropeanProduct;
-use Illuminate\Support\Arr;
 
 class SetEuropeanProductService
 {

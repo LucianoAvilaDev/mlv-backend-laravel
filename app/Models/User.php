@@ -20,6 +20,7 @@ class User extends Authenticatable
         'birth_date',
         'cpf',
         'address',
+        'phone',
         'cep',
         'is_admin'
     ];

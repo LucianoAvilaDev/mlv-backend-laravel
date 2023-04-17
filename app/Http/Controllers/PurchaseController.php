@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\purchase\StorePurchaseRequest;
 use App\Models\Purchase;
+use App\Services\purchase\StorePurchaseService;
 
 class PurchaseController extends Controller
 {
@@ -11,7 +12,7 @@ class PurchaseController extends Controller
     {
         $validatedPurchase = $request->validated();
 
-        $newPurchase = Purchase::create($validatedPurchase->toArray());
+        $newPurchase = StorePurchaseService::run($validatedPurchase);
 
         return response()->json($newPurchase, 201);
     }

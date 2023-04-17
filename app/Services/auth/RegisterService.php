@@ -20,6 +20,8 @@ class RegisterService
             $validatedUser['password'] = Hash::make($request['password']);
             $validatedUser['is_admin'] = false;
 
+            dd($validatedUser);
+
             $newUser = User::create($validatedUser);
 
             DB::commit();

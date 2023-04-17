@@ -17,7 +17,7 @@ class StorePurchaseService
 
             $validatedPurchase = $request->validated();
 
-            $newPurchase = Purchase::create($validatedPurchase->toArray());
+            $newPurchase = Purchase::create($validatedPurchase);
 
             StoreItemProductsService::run($validatedPurchase['products'], $newPurchase['id']);
 

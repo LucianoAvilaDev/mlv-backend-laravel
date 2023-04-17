@@ -3,8 +3,8 @@
 namespace App\Services\itemProducts;
 
 use App\Models\ItemProduct;
-use App\Services\user\GetItemFromBrazilianProductService;
-use App\Services\user\GetItemFromEuropeanProductService;
+use App\Services\itemProducts\GetItemFromBrazilianProductService;
+use App\Services\itemProducts\GetItemFromEuropeanProductService;
 use Error;
 use Illuminate\Support\Facades\DB;
 
@@ -18,11 +18,13 @@ class StoreItemProductsService
             foreach ($products as $product) {
                 switch($product['provider']){
                     case 'br': {
-                        $newItem = GetItemFromBrazilianProductService::run($product, $purchaseId);
+                        $newItem = GetItemFromBrazilianProductService::run($product);
+                        $newItem['purchase_id'] = $purchaseId;
                         ItemProduct::create($newItem);
                     }
                     case 'eu': {
                         $newItem = GetItemFromEuropeanProductService::run($product, $purchaseId);
+                        $newItem['purchase_id'] = $purchaseId;
                         ItemProduct::create($newItem);
                     }
                 }

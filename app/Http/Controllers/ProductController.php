@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\product\SetBrazilianProductService;
 use App\Services\product\SetEuropeanProductService;
+use App\Services\itemProducts\GetItemFromBrazilianProductService;
+use App\Services\itemProducts\GetItemFromEuropeanProductService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
@@ -15,11 +17,11 @@ class ProductController extends Controller
         $europeanProviderProducts = Http::get(env('API_EUROPEAN_PROVIDER'))->json();
 
         $brProducts = Arr::map($brazilianProviderProducts, function ($product) {
-            return SetBrazilianProductService::run($product);
+            return GetItemFromBrazilianProductService::run(SetBrazilianProductService::run($product));
         });
 
         $euProducts = Arr::map($europeanProviderProducts, function ($product) {
-            return SetEuropeanProductService::run($product);
+            return GetItemFromEuropeanProductService::run(SetEuropeanProductService::run($product));
 
         });
 
@@ -33,12 +35,12 @@ class ProductController extends Controller
         switch ($provider) {
             case "br": {
                     $responseProduct = Http::get(env('API_BRAZILIAN_PROVIDER') . '/' . $id)->json();
-                    $product = SetBrazilianProductService::run($responseProduct);
+                    $product = GetItemFromBrazilianProductService::run(SetBrazilianProductService::run($responseProduct));
                     return response()->json($product, 200);
                 }
             case "eu": {
                     $responseProduct = Http::get(env('API_EUROPEAN_PROVIDER') . '/' . $id)->json();
-                    $product = SetEuropeanProductService::run($responseProduct);
+                    $product = GetItemFromEuropeanProductService::run(SetEuropeanProductService::run($responseProduct));
                     return response()->json($product, 200);
                 }
             default:

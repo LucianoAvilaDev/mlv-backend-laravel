@@ -136,5 +136,6 @@ Para resolver o problema foram definidas as seguintes regras:
     -   Foi criada uma **middleware** para validação se o usuário é **admin** ou não.
     -   A middleware **admin** foi utilizada em algumas rotas para previnir de o usuário acessar dados indevidos.
     -   Rodei **php artisan route:list** para checagem das rotas.
+    -   O backend foi testado usando o **Insomnia**
 
 ---
